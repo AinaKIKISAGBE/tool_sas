@@ -37,3 +37,8 @@ https://teaching.slmc.fr/sas_macro/handout.pdf %MACRO test(deb,fin); DATA chomag
 https://support.sas.com/resources/papers/proceedings11/113-2011.pdf MACRO DO_LIST; %DO I = 1 %TO 50; COL&I._LINE1 %END; %MEND DO_LIST;
 
 https://cmie.padoa.fr/employee/login?email=aina.kikisagbe@mel.lincoln.fr&token=FJGCFF
+
+
+# paralélisation parallele stak submit 
+https://www.sas.com/offices/europe/france/services/support/doc_techniques/Process_CONNECT.pdf
+
