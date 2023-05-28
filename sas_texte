@@ -59,3 +59,24 @@ https://support.sas.com/resources/papers/proceedings/proceedings/sugi29/124-29.p
 https://blogs.sas.com/content/sgf/2021/01/13/running-sas-programs-in-parallel-using-sas-connect/
 
 https://www.lexjansen.com/wuss/2018/15_Final_Paper_PDF.pdf
+
+
+
+algo python 
+import numpy as np
+
+lola=["A","B","C"]
+nb_cpu = 5
+max_ligne=17
+nb_tour = np.ceil(max_ligne/nb_cpu)
+
+begin_cpu = 0
+for i in range(1,max_ligne,1):
+    if (i-1)-begin_cpu*nb_cpu <= 0 and  i-begin_cpu*nb_cpu >0:
+        print("begin_cpu = ", begin_cpu)
+        begin_cpu=begin_cpu+1
+    #if i-begin_cpu*nb_cpu == 0 :
+    #    begin_cpu=begin_cpu+1
+        
+    print(i)
+    
