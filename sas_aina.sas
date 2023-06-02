@@ -48,7 +48,7 @@ proc sort data=work.class_index1;
  by age row_id;
 run;
 
-/*lister tous les id regrouper par la clÈ age */
+/*lister tous les id regrouper par la cl√© age */
 data work.class_index;
 	keep age rid;
  	retain age rid;
@@ -61,7 +61,7 @@ data work.class_index;
 run; 
 
 
-/* trier directement par age ordre decroissant par dÈfaut*/
+/* trier directement par age ordre decroissant par d√©faut*/
 options msglevel=i;
 /* class with index*/
 data work.class (index=(age));
@@ -81,12 +81,12 @@ data work.direct;
  	do age=13,14;
  		do until (eof);
  			set class key=age end=eof;
-			/* _IORC_=0 si une correspondance a ÈtÈ trouvÈe */
+			/* _IORC_=0 si une correspondance a √©t√© trouv√©e */
  			if _IORC_=0 then do; /* 0 indicates a match was found */ 
- 				put _all_; /* envoyer les correspondances trouvÈes ‡ key (age = 13 ou age=14) dans class vers direct */
+ 				put _all_; /* envoyer les correspondances trouv√©es √† key (age = 13 ou age=14) dans class vers direct */
  				output;
  			end;
-			/*s'il n'y a pas de correspondance, rÈinitialisez le drapeau d'erreur et continuez*/
+			/*s'il n'y a pas de correspondance, r√©initialisez le drapeau d'erreur et continuez*/
  			else _ERROR_=0; /* if no match, reset the error flag and continue */
  		end;
  	end;
@@ -178,7 +178,7 @@ create table match_merge_sql as
 quit;
 %let temps_fin = %sysfunc(time());
 %let duree4 = %sysevalf(&temps_fin.-&temps_debut.); 
-%put DurÈe díexÈcution : &duree4.;
+%put Dur√©e d‚Äôex√©cution : &duree4.;
 proc sql noprint;
     select count(*) into :nbligne_sql from match_merge_sql;
 quit;
@@ -214,7 +214,7 @@ data work.hash_merge (drop=rc i);
 		/* initialisation des formats des variables*/
 		smallvar1=.; smallvar2=.;	
  		rc = h_smallq.find ();
-		/* si la variable n'est pas trouvÈ alors rc != 0 */
+		/* si la variable n'est pas trouv√© alors rc != 0 */
 		/*if rc ne 0 then do;
 	 		smallvar1=.; smallvar2=.;
 	 	end;*/ 
@@ -223,7 +223,7 @@ data work.hash_merge (drop=rc i);
 run; 
 %let temps_fin = %sysfunc(time());
 %let duree3 = %sysevalf(&temps_fin.-&temps_debut.); 
-%put DurÈe díexÈcution : &duree3.;
+%put Dur√©e d‚Äôex√©cution : &duree3.;
 proc sql noprint;
     select count(*) into :nbligne_hash_merge from hash_merge;
 quit;
@@ -238,7 +238,7 @@ data small; set small_sauv; run;
 data large; set large_sauv; run;
 
 /*******************/
-/* creating indexes uniquement sur la deuxiËme table*/
+/* creating indexes uniquement sur la deuxi√®me table*/
 %let temps_debut = %sysfunc(time()); 
 proc datasets lib=work nolist;
  modify small; index create /*keyvar*/ smallvar;
@@ -255,7 +255,7 @@ data work.match_merge_index_2;
 run;
 %let temps_fin = %sysfunc(time());
 %let duree2_2 = %sysevalf(&temps_fin.-&temps_debut.); 
-%put DurÈe díexÈcution : &duree2_2.;
+%put Dur√©e d‚Äôex√©cution : &duree2_2.;
 proc sql noprint;
     select count(*) into :nbligne_index2 from match_merge_index_2;
 quit;
@@ -287,7 +287,7 @@ data work.match_merge_index;
 run; 
 %let temps_fin = %sysfunc(time());
 %let duree2 = %sysevalf(&temps_fin.-&temps_debut.); 
-%put DurÈe díexÈcution : &duree2.;
+%put Dur√©e d‚Äôex√©cution : &duree2.;
 proc sql noprint;
     select count(*) into :nbligne_index from match_merge_index;
 quit;
@@ -316,7 +316,7 @@ data work.match_merge;
 run;
 %let temps_fin = %sysfunc(time());
 %let duree1 = %sysevalf(&temps_fin.-&temps_debut.); 
-%put DurÈe díexÈcution : &duree1.;
+%put Dur√©e d‚Äôex√©cution : &duree1.;
 proc sql noprint;
     select count(*) into :nbligne from match_merge;
 quit;
@@ -342,7 +342,7 @@ data work.match_merge_2;
 run;
 %let temps_fin = %sysfunc(time());
 %let duree1_2 = %sysevalf(&temps_fin.-&temps_debut.); 
-%put DurÈe díexÈcution : &duree1_2.;
+%put Dur√©e d‚Äôex√©cution : &duree1_2.;
 proc sql noprint;
     select count(*) into :nbligne_2 from match_merge_2;
 quit;
@@ -362,12 +362,12 @@ data large; set large_sauv; run;
 %put nbligne = &nbligne.;
 %put nbligne_2 = &nbligne_2.;
 
-%put DurÈe díexÈcution nbligne_sql : &duree4.;
-%put DurÈe díexÈcution nbligne_hash_merge : &duree3.;
-%put DurÈe díexÈcution nbligne_index2 : &duree2_2.;
-%put DurÈe díexÈcution nbligne_index : &duree2.;
-%put DurÈe díexÈcution nbligne : &duree1.;
-%put DurÈe díexÈcution nbligne_2 : &duree1_2.;
+%put Dur√©e d‚Äôex√©cution nbligne_sql : &duree4.;
+%put Dur√©e d‚Äôex√©cution nbligne_hash_merge : &duree3.;
+%put Dur√©e d‚Äôex√©cution nbligne_index2 : &duree2_2.;
+%put Dur√©e d‚Äôex√©cution nbligne_index : &duree2.;
+%put Dur√©e d‚Äôex√©cution nbligne : &duree1.;
+%put Dur√©e d‚Äôex√©cution nbligne_2 : &duree1_2.;
 
 %mend testest; 
 
@@ -403,7 +403,7 @@ data work.hash_mergeq3 (drop=rc i);
  		set work.large end = eof_large;	
 		/*smallvar1=.; smallvar2=.;*/	
  		rc = h_smallq.find ();
-		/* si la variable n'est pas trouvÈ alors rc != 0 */
+		/* si la variable n'est pas trouv√© alors rc != 0 */
 		if rc ne 0 then do;
 	 		smallvar1=.; smallvar2=.;
 	 	end; 
@@ -454,7 +454,7 @@ data work.hash_merge (drop=rc i);
 run; 
 %let temps_fin = %sysfunc(time());
 %let duree3 = %sysevalf(&temps_fin.-&temps_debut.); 
-%put DurÈe díexÈcution : &duree3.;
+%put Dur√©e d‚Äôex√©cution : &duree3.;
 proc sql noprint;
     select count(*) into :nbligne_hash_merge from hash_merge;
 quit;
@@ -531,11 +531,11 @@ run;
  run;
 
  /* corresponding hash commands */
- rc = h_small.DefineKey ( ìkeyvarî );
- rc = h_small.DefineData ( ìsmallvar1î,îsmallvar2î,îsmallvar3î,îsmallvar4î);
+ rc = h_small.DefineKey ( ‚Äúkeyvar‚Äù );
+ rc = h_small.DefineData ( ‚Äúsmallvar1‚Äù,‚Äùsmallvar2‚Äù,‚Äùsmallvar3‚Äù,‚Äùsmallvar4‚Äù);
 
- rc = h_large.DefineKey ( "keyvar",îkeyseqî );
- rc = h_large.DefineData ( "largevar1","largevar2","largevar3", Ö )
+ rc = h_large.DefineKey ( "keyvar",‚Äùkeyseq‚Äù );
+ rc = h_large.DefineData ( "largevar1","largevar2","largevar3", ‚Ä¶ )
  rc = h_large.DefineDone ();
  /* Fill it */
  maxkeyseq=0;
@@ -569,23 +569,23 @@ run;
  declare hash h_small (); 
 /* Define it */
  length keyvar smallvar1-smallvar4 8;
- /* recuperer le code retour dans rc. (rc=0 quand la requette s'est bien passÈe )*/
+ /* recuperer le code retour dans rc. (rc=0 quand la requette s'est bien pass√©e )*/
  rc = h_small.DefineKey ( "keyvar" );
  rc = h_small.DefineData ( "smallvar1","smallvar2","smallvar3","smallvar4");
  rc = h_small.DefineDone (); 
- /* Fill it : charger les donnÈes avec la table work.small */
+ /* Fill it : charger les donn√©es avec la table work.small */
  do until ( eof_small );
  	set work.small (keep=keyvar smallvar1-smallvar4) end = eof_small;
  	rc = h_small.add ();
  end; 
- /* Access it : accËs aux variables */
+ /* Access it : acc√®s aux variables */
  do until ( eof_big);
  	set work.big end = eof_big;
 	/* initialisation des formats des variables*/
  	smallvar1=.; smallvar2=.; smallvar3=.; smallvar4=.;
 	/* chercher ces variables*/
  	rc = h_small.find ();
-	/* si la variable n'est pas trouvÈ alors rc != 0 */
+	/* si la variable n'est pas trouv√© alors rc != 0 */
 	if rc ne 0 then do;
  		smallvar1=.; smallvar2=.; smallvar3=.; smallvar4=.;
  	end; 
@@ -612,12 +612,12 @@ run;
 
 
 
-/* 1 - rÈcupÈrer l'ensemble des fichiers d'un dossier */
+/* 1 - r√©cup√©rer l'ensemble des fichiers d'un dossier */
 %let rep_read = C:\Users\ksami\Documents\sas_aina\sas_rep;
 data fichiers_table_list (keep=fichiers);
 length fichiers $256;
 	fich=filename('fich',"&rep_read.\"); /* *lrecl=2000 truncover firstobs=1; */
-	/* ouverture du rÈpertoire */
+	/* ouverture du r√©pertoire */
 	did=dopen('fich');
 	/* comptage du nb de fichier */
 	nb_fich=dnum(did);
@@ -627,11 +627,11 @@ length fichiers $256;
 		fichiers=dread(did,i);
 		output;
 	end;
-	/* fermeture du rÈpertoire */
+	/* fermeture du r√©pertoire */
 	rc=dclose(did);
 run;
 
-/* 2- Mettre dans des macros-variables (fic_1 ‡ fic_n) les noms de fichiers */
+/* 2- Mettre dans des macros-variables (fic_1 √† fic_n) les noms de fichiers */
 data _null_; SET fichiers_table_list;
 * Le nom des fichiers;
 call symput('fic_'||left(trim(_n_)),fichiers);
@@ -640,7 +640,7 @@ call symput('nb_fichiers',_n_);
 run;
 
 
-/* 3 - Faire une boucle avec les opÈrations sur tes fichiers */
+/* 3 - Faire une boucle avec les op√©rations sur tes fichiers */
 %macro operation(); 
 	%do i=1 %to &nb_fichiers.;
 	* Pour appeler un fichier, faire "&&fic_&i.";
@@ -700,6 +700,127 @@ run;
 	%END;
 	;
 %MEND;
+
+
+
+/************ upload file from local to sas env ***********/
+/* Sp√©cifiez le r√©pertoire de destination dans SAS */
+%let sas_dir = /chemin/vers/repertoire_sas/;
+
+/* Utilisez PROC UPLOAD pour copier le fichier local vers SAS */
+proc upload 
+    infile = "chemin/vers/fichier_local"
+    outfile = "&sas_dir/nom_fichier_sas"
+    binary;
+run;
+
+%let sas_dir = /chemin/vers/repertoire_sas/;
+
+/* Utilisez PROC UPLOAD pour copier le fichier local vers SAS */
+proc upload 
+    infile = "chemin/vers/fichier_local"
+    outfile = "&sas_dir/nom_fichier_sas"
+    binary;
+run;
+``
+
+%let sas_dir = /chemin/vers/repertoire_sas/;
+
+/* Utilisez PROC UPLOAD pour copier le fichier local vers SAS */
+proc upload 
+    infile = "chemin/vers/fichier_local"
+    outfile = "&sas_dir/nom_fichier_sas"
+    binary;
+run
+
+%let sas_dir = /chemin/vers/repertoire_sas/;
+
+/* Utilisez PROC UPLOAD pour copier le fichier local vers SAS */
+proc upload 
+    infile = "chemin/vers/fichier_local"
+    outfile = "&sas_dir/nom_fichier_sas"
+    binary;
+
+%let sas_dir = /chemin/vers/repertoire_sas/;
+
+/* Utilisez PROC UPLOAD pour copier le fichier local vers SAS */
+proc upload 
+    infile = "chemin/vers/fichier_local"
+    outfile = "&sas_dir/nom_fichier_sas"
+   
+
+%let sas_dir = /chemin/vers/repertoire_sas/;
+
+%let sas_dir = /chemin/vers/repertoire_sas/;
+
+/* Utilisez PROC UPLOAD pour copier le fichier local vers SAS */
+proc upload 
+    infile = "chemin/vers/fichier_local"
+    outfile = "&s
+
+%let sas_dir = /chemin/vers/repertoire_sas/;
+
+/* Utilisez PROC UPLOAD pour copier le fichier local vers SAS */
+proc upload 
+    infile = "chemin/vers/fichier_local"
+    outfile
+
+%let sas_dir = /chemin/vers/repertoire_sas/;
+
+/* Utilisez PROC UPLOAD pour copier le fichier local vers SAS */
+proc upload 
+    infile = "chemin/vers/fichier_local"
+
+%let sas_dir = /chemin/vers/repertoire_sas/;
+
+/* Utilisez PROC UPLOAD pour copier le fichier local vers SAS */
+proc upload 
+    infile = "chemin/vers/f
+
+%let sas_dir = /chemin/vers/repertoire_sas/;
+
+/* Utilisez PROC UPLOAD pour copier le fichier local vers SAS */
+proc upload 
+    infile = "
+
+%let sas_dir = /chemin/vers/repertoire_sas/;
+
+/* Utilisez PROC UPLOAD pour copier le fichier local vers SAS */
+proc upload 
+    infile
+
+%let sas_dir = /chemin/vers/repertoire_sas/;
+
+/* Utilisez PROC UPLOAD pour copier le fichier local vers SAS */
+proc upload 
+
+%let sas_dir = /chemin/vers/repertoire_sas/;
+
+/* Utilisez PROC UPLOAD pour copier le fichier local vers SAS */
+proc
+
+%let sas_dir = /chemin/vers/repertoire_sas/;
+
+/* Utilisez
+
+%let sas_dir = /chemin/vers/repertoire_sas/;
+
+/* Util
+
+%let sas_dir = /chemin/vers/repertoire_sas/;
+
+
+%let sas_dir = /chem
+
+%let sas_dir = /
+
+%let sas
+
+%let
+
+Assure"chemin/vers/fichier_local" par"chemin/vers/repertoire_sas/" par"nom_fichier_sas" par le
+
+Notez
 
 
 
